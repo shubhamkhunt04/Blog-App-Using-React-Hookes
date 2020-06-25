@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Comments = ({ comments }) => {
-  console.log("Comments components", comments);
   return (
     <div className="container text-white">
       <h4 className="text-white mb-4 mt-4 text-center">Comments</h4>

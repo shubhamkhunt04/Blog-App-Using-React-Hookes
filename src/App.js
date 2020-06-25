@@ -2,11 +2,10 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Switch,Redirect } from "react-router-dom";
 import Home from "./Pages/HomePage/Home";
-import NavigationBar from "./Components/NavigationBar/NavigationBar";
 import AutherDetail from "./Pages/AutherDetail/AutherDetail";
 import PostDetail from "./Pages/PostDetail/PostDetail";
 import MostLikedPosts from "./Pages/MostLikedPosts/MostLikedPosts";
-import MostCommentedPost from "./Pages/MostLikedComments/MostCommentedPosts";
+import MostCommentedPosts from "./Pages/MostCommentedPosts/MostCommentedPosts";
 
 function App() {
   return (
@@ -17,7 +16,7 @@ function App() {
           <Route exact path="/authors/:id" component={AutherDetail} />
           <Route exact path="/posts/:postId" component={PostDetail} />
           <Route exact path="/mostlikedposts" component={MostLikedPosts} />
-          <Route exact path="/mostcommentedpost" component={MostCommentedPost} />
+          <Route exact path="/mostcommentedpost" component={MostCommentedPosts} />
           <Redirect to="/authors"></Redirect>
         </Switch>
       </BrowserRouter>

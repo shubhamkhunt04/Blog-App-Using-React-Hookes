@@ -32,8 +32,7 @@ const Posts = ({ posts }) => {
       marginRight: "7rem",
     };
   };
-
-  console.log("Post Components state", posts);
+  
   return (
     <div className="container">
       {posts.map((post) => {

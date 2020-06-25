@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import NavigationBar from "../../Components/NavigationBar/NavigationBar";
 import Axios from "axios";
 
-const MostCommentedPost = () => {
+const MostCommentedPosts = () => {
   const [posts, setPosts] = useState([]);
 
   // Fetching Author Posts From Server
@@ -89,4 +89,4 @@ const MostCommentedPost = () => {
   );
 };
 
-export default MostCommentedPost;
+export default MostCommentedPosts;
