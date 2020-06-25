@@ -8,7 +8,6 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
-import "./NavigationBar.css";
 
 const NavigationBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +16,10 @@ const NavigationBar = () => {
   return (
     <div className="mb-5 font-weight-normal">
       <Navbar color="danger" light expand="md">
-        <NavbarBrand className="text-white mx-2 font-weight-bold" href="/authors">
+        <NavbarBrand
+          className="text-white mx-2 font-weight-bold"
+          href="/authors"
+        >
           M.S.K.
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />

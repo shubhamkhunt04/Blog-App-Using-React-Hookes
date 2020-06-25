@@ -1,10 +1,7 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Comments = ({ comments }) => {
-
-    
-
   console.log("Comments components", comments);
   return (
     <div className="container text-white">
@@ -12,18 +9,22 @@ const Comments = ({ comments }) => {
       {comments.map((comment) => {
         return (
           <li className="media alert alert-primary" key={comment.id}>
-              <div>
-            <Link to={`/authors/${comment.authorId}`}>
-               <h5> <i className="fa fa-user-circle-o text-danger"> Author</i></h5><br></br>
-          </Link>
-                <div className="media-body"> 
-                  <label className="font-italic font-weight-bold">
-                    Comment :
-                  </label>
-                  <span className="ml-3 text-dark">{comment.text}</span>
-                </div>
+            <div>
+              <Link to={`/authors/${comment.authorId}`}>
+                <h5>
+                  {" "}
+                  <i className="fa fa-user-circle-o text-danger"> Author</i>
+                </h5>
+                <br></br>
+              </Link>
+              <div className="media-body">
+                <label className="font-italic font-weight-bold">
+                  Comment :
+                </label>
+                <span className="ml-3 text-dark">{comment.text}</span>
               </div>
-            </li>
+            </div>
+          </li>
         );
       })}
     </div>

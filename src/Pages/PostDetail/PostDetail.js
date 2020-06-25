@@ -4,8 +4,6 @@ import Axios from "axios";
 import Comments from "../../Components/Comments/Comments";
 
 const PostDetail = ({ match }) => {
-  console.log(match);
-
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
 
@@ -14,7 +12,6 @@ const PostDetail = ({ match }) => {
       `http://localhost:3004/posts/${match.params.postId}`
     );
     const post = await fetchPost.data;
-    // console.log(post);
     setPost(post);
   };
 

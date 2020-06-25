@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import NavigationBar from "../../Components/NavigationBar/NavigationBar";
 import Axios from "axios";
 
@@ -16,7 +16,6 @@ const MostCommentedPost = () => {
     });
 
     const mostCommentedPosts = allPosts.slice(0, 10);
-    console.log("final comments", mostCommentedPosts);
 
     // Setting comments state
     setPosts(mostCommentedPosts);
@@ -60,7 +59,9 @@ const MostCommentedPost = () => {
   return (
     <div>
       <NavigationBar />
-      <h4 className="text-white mb-5 mt-4 text-center">Top 10 Most Commented Posts</h4>
+      <h4 className="text-white mb-5 mt-4 text-center">
+        Top 10 Most Commented Posts
+      </h4>
       <div className="container">
         {posts.map((post) => {
           return (
@@ -72,7 +73,9 @@ const MostCommentedPost = () => {
               <Link to={`/posts/${post.id}`}>
                 <h5 className="text-dark">
                   <span>{post.title}</span>
-                  <span style={CommentStyle()}>Comments {post.numComments}</span>
+                  <span style={CommentStyle()}>
+                    Comments {post.numComments}
+                  </span>
                   <span style={dateStyle()}>
                     {new Date(post.datePublished).toDateString()}
                   </span>

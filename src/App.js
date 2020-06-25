@@ -1,8 +1,6 @@
 import React from "react";
-// import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Switch,Redirect } from "react-router-dom";
-// import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Pages/HomePage/Home";
 import NavigationBar from "./Components/NavigationBar/NavigationBar";
 import AutherDetail from "./Pages/AutherDetail/AutherDetail";
@@ -13,7 +11,6 @@ import MostCommentedPost from "./Pages/MostLikedComments/MostCommentedPosts";
 function App() {
   return (
     <div>
-      {/* <Navbar /> */}
       <BrowserRouter>
         <Switch>
           <Route exact path="/authors" component={Home} />

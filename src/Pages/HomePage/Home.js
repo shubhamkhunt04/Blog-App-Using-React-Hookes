@@ -4,6 +4,7 @@ import Card from "../../Components/Card/Card";
 import NavigationBar from "../../Components/NavigationBar/NavigationBar";
 import AuthorPagination from "../../Components/AuthorPagination/AuthorPagination";
 import Axios from "axios";
+import Footer from "../../Components/Footer/Footer";
 
 const initialUsers = {
   loading: true,
@@ -12,8 +13,6 @@ const initialUsers = {
 };
 
 const reducer = (state, action) => {
-  //   console.log("Pyload", action.payLoad);
-
   switch (action.type) {
     case "FETCH_SCCESS":
       return {
@@ -48,7 +47,6 @@ const Home = () => {
   useEffect(() => {
     Axios.get(`http://localhost:3004/authors`)
       .then((authors) => {
-        // console.log(authors.data);
         dispatch({
           type: "FETCH_SCCESS",
           payLoad: authors.data,
@@ -60,13 +58,6 @@ const Home = () => {
         })
       );
   }, []);
-
-  //   console.log(state.loading);
-
-  // console.log("Math", Math.ceil(state.authors.length / showPerPage));
-  // console.log("showPerPage", showPerPage);
-  // console.log("onPaginationChange", onPaginationChange);
-  // console.log("totalAuthors", state.authors.length);
 
   return (
     <div>
@@ -83,7 +74,6 @@ const Home = () => {
             {state.authors
               .slice(pagination.start, pagination.end)
               .map((author) => {
-                // console.log(author);
                 return (
                   <div key={author.id}>
                     <Col key={author.id} md={4} sm={6} xs={12}>
@@ -105,6 +95,7 @@ const Home = () => {
           totalAuthors={state.authors.length}
         />
       </Container>
+      <Footer />
     </div>
   );
 };

@@ -4,8 +4,6 @@ import Axios from "axios";
 import Posts from "../../Components/Posts/Posts";
 
 const AutherDetail = ({ match }) => {
-  // console.log(match);
-
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [author, setAuthor] = useState({});
@@ -66,51 +64,37 @@ const AutherDetail = ({ match }) => {
     };
   };
 
-  // For Selecting Option in Forms
-  const [state, setState] = useState("");
-
   const inputChanged = (e) => {
-    console.log("Input changed called");
-    setState(e.target.value);
-
-    console.log("state.value ", state);
-    
-  sorting();
-  };
-
-  const sorting = () => {
-    if (state === "dateAsc") {
-      let dateAsc = posts.sort((a, b) => {
-        return b.datePublished - a.datePublished;
-      });
+    if (e.target.value === "dateAsc") {
+      let dateAsc = [
+        ...posts.sort((a, b) => {
+          return a.datePublished - b.datePublished;
+        }),
+      ];
       setPosts(dateAsc);
-      console.log("dateAsc", state);
-    } else if (state === "dateDesc") {
-      let dateDes = posts.sort((a, b) => {
-        return a.datePublished - b.datePublished;
-      });
+    } else if (e.target.value === "dateDesc") {
+      let dateDes = [
+        ...posts.sort((a, b) => {
+          return b.datePublished - a.datePublished;
+        }),
+      ];
       setPosts(dateDes);
-      console.log("dateDesc", state);
-    } else if (state === "likesAsc") {
-      let likesAsc = posts.sort((a, b) => {
-        return b.numLikes - a.numLikes;
-      });
-      setPosts(likesAsc.reverse());
-      console.log("likesAsc", state);
-    } else if (state === "likesDesc") {
-      let likesDesc = posts.sort((a, b) => {
-        return a.numLikes - b.numLikes;
-      });
+    } else if (e.target.value === "likesAsc") {
+      let likesAsc = [
+        ...posts.sort((a, b) => {
+          return a.numLikes - b.numLikes;
+        }),
+      ];
+      setPosts(likesAsc);
+    } else if (e.target.value === "likesDesc") {
+      let likesDesc = [
+        ...posts.sort((a, b) => {
+          return b.numLikes - a.numLikes;
+        }),
+      ];
       setPosts(likesDesc);
-      console.log("likesDesc", state);
     }
   };
-
-  // useEffect(() => {
-  //   console.log("UseEffect Called");
-  // }, [state]);
-
-  console.log("Printing posts", posts);
 
   return (
     <div>
@@ -141,7 +125,6 @@ const AutherDetail = ({ match }) => {
                 </label>
                 <select
                   className="custom-select mr-sm-2"
-                  value={state.value}
                   onChange={inputChanged}
                 >
                   <option defaultValue>Choose...</option>

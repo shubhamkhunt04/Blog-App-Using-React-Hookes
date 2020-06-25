@@ -16,7 +16,6 @@ const MostLikedPost = () => {
     });
 
     const mostLikedPosts = allPosts.slice(0, 10);
-    console.log("final comments", mostLikedPosts);
 
     // Setting comments state
     setPosts(mostLikedPosts);
@@ -29,7 +28,9 @@ const MostLikedPost = () => {
   return (
     <div>
       <NavigationBar />
-      <h4 className="text-white mb-5 mt-4 text-center">Top 10 Most Liked Posts</h4>
+      <h4 className="text-white mb-5 mt-4 text-center">
+        Top 10 Most Liked Posts
+      </h4>
       <Posts posts={posts} />
     </div>
   );
