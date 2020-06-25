@@ -46,7 +46,7 @@ const PostDetail = ({ match }) => {
       <NavigationBar />
       <h4 className="text-white mb-4 text-center">Post Details</h4>
       <div className="card mx-auto" style={getStyle()}>
-        <h3 className="title border">{post.title}</h3>
+        <h3 className="title">{post.title}</h3>
         <p>{new Date(post.datePublished).toDateString()}</p>
         <p>
           LIKES (<i className="fa fa-thumbs-up fa-1x"></i>) : {post.numLikes}
