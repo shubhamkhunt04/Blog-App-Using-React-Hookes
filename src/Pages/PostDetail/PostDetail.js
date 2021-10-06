@@ -1,45 +1,43 @@
-import React, { useState, useEffect } from "react";
-import NavigationBar from "../../Components/NavigationBar/NavigationBar";
-import Axios from "axios";
-import Comments from "../../Components/Comments/Comments";
+import React, {useState, useEffect} from 'react'
+import NavigationBar from '../../Components/NavigationBar/NavigationBar'
+import Axios from 'axios'
+import Comments from '../../Components/Comments/Comments'
 
-const PostDetail = ({ match }) => {
-  const [post, setPost] = useState({});
-  const [comments, setComments] = useState([]);
+const PostDetail = ({match}) => {
+  const [post, setPost] = useState({})
+  const [comments, setComments] = useState([])
 
   const fetchOnePost = async () => {
-    const fetchPost = await Axios.get(
-      `http://localhost:3004/posts/${match.params.postId}`
-    );
-    const post = await fetchPost.data;
-    setPost(post);
-  };
+    const fetchPost = await Axios.get(`${baseUrl}/posts/${match.params.postId}`)
+    const post = await fetchPost.data
+    setPost(post)
+  }
 
   const fetchComments = async () => {
-    const fetchComments = await Axios.get(`http://localhost:3004/comments`);
-    const comments = await fetchComments.data;
+    const fetchComments = await Axios.get(`${baseUrl}/comments`)
+    const comments = await fetchComments.data
     const perticularPostComments = comments.filter(
-      (comment) => comment.postId === parseInt(match.params.postId)
-    );
-    setComments(perticularPostComments);
-  };
+      comment => comment.postId === parseInt(match.params.postId),
+    )
+    setComments(perticularPostComments)
+  }
 
   useEffect(() => {
-    fetchOnePost();
-    fetchComments();
-  }, []);
+    fetchOnePost()
+    fetchComments()
+  }, [])
 
   const getStyle = () => {
     return {
-      width: "80vw",
-      height: "67vh",
-      padding: "20px",
-      backgroundColor: "#C3FFA9",
-      border: "none",
-      margin: "15px",
-      textAlign: "center",
-    };
-  };
+      width: '80vw',
+      height: '67vh',
+      padding: '20px',
+      backgroundColor: '#C3FFA9',
+      border: 'none',
+      margin: '15px',
+      textAlign: 'center',
+    }
+  }
 
   return (
     <div>
@@ -55,7 +53,7 @@ const PostDetail = ({ match }) => {
       </div>
       <Comments comments={comments} />
     </div>
-  );
-};
+  )
+}
 
-export default PostDetail;
+export default PostDetail

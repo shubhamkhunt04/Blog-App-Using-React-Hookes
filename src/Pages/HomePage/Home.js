@@ -1,63 +1,63 @@
-import React, { useState, useEffect, useReducer } from "react";
-import { Row, Col, Container, Alert } from "reactstrap";
-import Card from "../../Components/Card/Card";
-import NavigationBar from "../../Components/NavigationBar/NavigationBar";
-import AuthorPagination from "../../Components/AuthorPagination/AuthorPagination";
-import Axios from "axios";
-import Footer from "../../Components/Footer/Footer";
+import React, {useState, useEffect, useReducer} from 'react'
+import {Row, Col, Container, Alert} from 'reactstrap'
+import Card from '../../Components/Card/Card'
+import NavigationBar from '../../Components/NavigationBar/NavigationBar'
+import AuthorPagination from '../../Components/AuthorPagination/AuthorPagination'
+import Axios from 'axios'
+import Footer from '../../Components/Footer/Footer'
 
 const initialUsers = {
   loading: true,
-  error: "",
+  error: '',
   authors: [],
-};
+}
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "FETCH_SCCESS":
+    case 'FETCH_SCCESS':
       return {
         loading: false,
         authors: action.payLoad,
-        error: "",
-      };
-    case "FETCH_ERROR":
+        error: '',
+      }
+    case 'FETCH_ERROR':
       return {
         loading: false,
         authors: [],
-        error: "Somthing Went Wrong !!",
-      };
+        error: 'Somthing Went Wrong !!',
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
 const Home = () => {
-  const [state, dispatch] = useReducer(reducer, initialUsers);
+  const [state, dispatch] = useReducer(reducer, initialUsers)
 
-  const [showPerPage, setShowPerPage] = useState(75);
+  const [showPerPage, setShowPerPage] = useState(75)
   const [pagination, setPagination] = useState({
     start: 0,
     end: showPerPage,
-  });
+  })
 
   const onPaginationChange = (start, end) => {
-    setPagination({ start: start, end: end });
-  };
+    setPagination({start: start, end: end})
+  }
 
   useEffect(() => {
-    Axios.get(`http://localhost:3004/authors`)
-      .then((authors) => {
+    Axios.get(`${baseUrl}/authors`)
+      .then(authors => {
         dispatch({
-          type: "FETCH_SCCESS",
+          type: 'FETCH_SCCESS',
           payLoad: authors.data,
-        });
+        })
       })
       .catch(
         dispatch({
-          type: "FETCH_ERROR",
-        })
-      );
-  }, []);
+          type: 'FETCH_ERROR',
+        }),
+      )
+  }, [])
 
   return (
     <div>
@@ -73,17 +73,17 @@ const Home = () => {
           <Row>
             {state.authors
               .slice(pagination.start, pagination.end)
-              .map((author) => {
+              .map(author => {
                 return (
                   <div key={author.id}>
                     <Col key={author.id} md={4} sm={6} xs={12}>
                       <Card
-                        name={author.firstName + " " + author.lastName}
+                        name={author.firstName + ' ' + author.lastName}
                         id={author.id}
                       />
                     </Col>
                   </div>
-                );
+                )
               })}
           </Row>
         )}
@@ -97,7 +97,7 @@ const Home = () => {
       </Container>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
