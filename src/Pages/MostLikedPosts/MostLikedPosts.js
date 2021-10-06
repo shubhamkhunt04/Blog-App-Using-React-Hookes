@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from "react";
-import NavigationBar from "../../Components/NavigationBar/NavigationBar";
-import Axios from "axios";
-import Posts from "../../Components/Posts/Posts";
+import React, {useState, useEffect} from 'react'
+import NavigationBar from '../../Components/NavigationBar/NavigationBar'
+import Axios from 'axios'
+import Posts from '../../Components/Posts/Posts'
 
 const MostLikedPost = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([])
 
   // Fetching Author Posts From Server
   const fetchAuthorPosts = async () => {
-    const fetchAllPosts = await Axios.get(`http://localhost:3004/posts`);
-    const datas = await fetchAllPosts.data;
+    const fetchAllPosts = await Axios.get(`${baseUrl}/posts`)
+    const datas = await fetchAllPosts.data
 
     const allPosts = datas.sort((a, b) => {
-      return b.numLikes - a.numLikes;
-    });
+      return b.numLikes - a.numLikes
+    })
 
-    const mostLikedPosts = allPosts.slice(0, 10);
+    const mostLikedPosts = allPosts.slice(0, 10)
 
     // Setting comments state
-    setPosts(mostLikedPosts);
-  };
+    setPosts(mostLikedPosts)
+  }
 
   useEffect(() => {
-    fetchAuthorPosts();
-  }, []);
+    fetchAuthorPosts()
+  }, [])
 
   return (
     <div>
@@ -33,6 +33,6 @@ const MostLikedPost = () => {
       </h4>
       <Posts posts={posts} />
     </div>
-  );
-};
-export default MostLikedPost;
+  )
+}
+export default MostLikedPost

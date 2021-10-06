@@ -1,100 +1,101 @@
-import React, { useState, useEffect } from "react";
-import NavigationBar from "../../Components/NavigationBar/NavigationBar";
-import Axios from "axios";
-import Posts from "../../Components/Posts/Posts";
+import React, {useState, useEffect} from 'react'
+import NavigationBar from '../../Components/NavigationBar/NavigationBar'
+import Axios from 'axios'
+import Posts from '../../Components/Posts/Posts'
+import {baseUrl} from '../../utils/config'
 
-const AutherDetail = ({ match }) => {
-  const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [author, setAuthor] = useState({});
+const AutherDetail = ({match}) => {
+  const [posts, setPosts] = useState([])
+  const [comments, setComments] = useState([])
+  const [author, setAuthor] = useState({})
 
   // Fetching Author From Server
   const fetchAuthor = async () => {
     const fetchPerticularAuthor = await Axios.get(
-      `http://localhost:3004/authors/${match.params.id}`
-    );
-    const author = await fetchPerticularAuthor.data;
-    setAuthor(author);
-  };
+      `${baseUrl}/authors/${match.params.id}`,
+    )
+    const author = await fetchPerticularAuthor.data
+    setAuthor(author)
+  }
 
   // Fetching Author Posts From Server
   const fetchAuthorPosts = async () => {
-    const fetchAllPosts = await Axios.get(`http://localhost:3004/posts`);
-    const datas = await fetchAllPosts.data;
+    const fetchAllPosts = await Axios.get(`${baseUrl}/posts`)
+    const datas = await fetchAllPosts.data
     const authorPosts = datas.filter(
-      (post) => post.authorId === parseInt(match.params.id)
-    );
+      post => post.authorId === parseInt(match.params.id),
+    )
     // Setting posts state
-    setPosts(authorPosts);
-  };
+    setPosts(authorPosts)
+  }
 
   // Fetching Author Comments From Server
   const fetchAuthorComments = async () => {
-    const fetchAllCommnets = await Axios.get(`http://localhost:3004/comments`);
-    const datas = await fetchAllCommnets.data;
+    const fetchAllCommnets = await Axios.get(`${baseUrl}/comments`)
+    const datas = await fetchAllCommnets.data
 
     const authorComments = datas.filter(
-      (comment) => comment.authorId === parseInt(match.params.id)
-    );
+      comment => comment.authorId === parseInt(match.params.id),
+    )
 
     // Setting comments state
-    setComments(authorComments);
-  };
+    setComments(authorComments)
+  }
 
   useEffect(() => {
-    fetchAuthor();
-  }, []);
+    fetchAuthor()
+  }, [])
 
   useEffect(() => {
-    fetchAuthorPosts();
-  }, []);
+    fetchAuthorPosts()
+  }, [])
 
   useEffect(() => {
-    fetchAuthorComments();
-  }, []);
+    fetchAuthorComments()
+  }, [])
 
   const getStyle = () => {
     return {
-      width: "24rem",
-      padding: "20px",
-      backgroundColor: "#C3FFA9",
-      border: "none",
-      margin: "15px",
-      textAlign: "center",
-    };
-  };
+      width: '24rem',
+      padding: '20px',
+      backgroundColor: '#C3FFA9',
+      border: 'none',
+      margin: '15px',
+      textAlign: 'center',
+    }
+  }
 
-  const inputChanged = (e) => {
-    if (e.target.value === "dateAsc") {
+  const inputChanged = e => {
+    if (e.target.value === 'dateAsc') {
       let dateAsc = [
         ...posts.sort((a, b) => {
-          return a.datePublished - b.datePublished;
+          return a.datePublished - b.datePublished
         }),
-      ];
-      setPosts(dateAsc);
-    } else if (e.target.value === "dateDesc") {
+      ]
+      setPosts(dateAsc)
+    } else if (e.target.value === 'dateDesc') {
       let dateDes = [
         ...posts.sort((a, b) => {
-          return b.datePublished - a.datePublished;
+          return b.datePublished - a.datePublished
         }),
-      ];
-      setPosts(dateDes);
-    } else if (e.target.value === "likesAsc") {
+      ]
+      setPosts(dateDes)
+    } else if (e.target.value === 'likesAsc') {
       let likesAsc = [
         ...posts.sort((a, b) => {
-          return a.numLikes - b.numLikes;
+          return a.numLikes - b.numLikes
         }),
-      ];
-      setPosts(likesAsc);
-    } else if (e.target.value === "likesDesc") {
+      ]
+      setPosts(likesAsc)
+    } else if (e.target.value === 'likesDesc') {
       let likesDesc = [
         ...posts.sort((a, b) => {
-          return b.numLikes - a.numLikes;
+          return b.numLikes - a.numLikes
         }),
-      ];
-      setPosts(likesDesc);
+      ]
+      setPosts(likesDesc)
     }
-  };
+  }
 
   return (
     <div>
@@ -106,7 +107,7 @@ const AutherDetail = ({ match }) => {
           alt="user"
           height="300px"
         />
-        <h4>{author.firstName + " " + author.lastName}</h4>
+        <h4>{author.firstName + ' ' + author.lastName}</h4>
         <p className="title text-secondary">Mobile : {author.phone}</p>
         <p>POSTS : {author.numPosts}</p>
         <p>
@@ -149,7 +150,7 @@ const AutherDetail = ({ match }) => {
 
       <Posts posts={posts} />
     </div>
-  );
-};
+  )
+}
 
-export default AutherDetail;
+export default AutherDetail
